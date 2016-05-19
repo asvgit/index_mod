@@ -1,0 +1,6 @@
+[package]
+name = "indmod"
+version = "0.1.0"
+authors = ["groot"]
+
+[dependencies]

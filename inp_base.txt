@@ -1,0 +1,5 @@
+f(g(a,b),c)
+f(g(b,d),c)
+f(g(d,b),a)
+f(g(c,a),d)
+f(x,y)
