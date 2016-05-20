@@ -23,13 +23,26 @@ fn main() {
     //do_our_best!
     println!("Working:");
     let mut b=Base::new();
+    //b.add_term(&"f(g(a,b),c)".to_string());
     for st in s.lines(){
         b.add_term(&st.to_string());
     }    
     println!("{}",b.to_string());
-    b.del_term(&3);
-    println!("{}",b.to_string());
-    let mut q=Index::start();
+    /*//deletion
+    b.del_term(&5);
+    println!("{}",b.to_string());*/
+    let mut q=Index::new();
     q.make_ptree(&st.to_string());
-    println!("{}",q.to_string());    
+    println!("{}",q.to_string());  
+    let p=inst(&b.main_ind,&q);
+    println!("inst = {:?}",p);
+    for pp in &p {
+        b.del_term(pp);
+    }    
+    println!("{}",b.to_string());
 }
+/*
+    let v1:Vec<usize>=vec![1, 2, 3, 4]; 
+    let v2:Vec<usize>=vec![3,4,5,6];
+    println!("{:?}\n{:?}\n{:?}\n{:?}",v1,v2,disjunction(&v1,&v2),conjunction(&v1,&v2));
+*/

@@ -1,0 +1,11 @@
+[root]
+name = "index"
+version = "0.1.0"
+dependencies = [
+ "indmod 0.1.0",
+]
+
+[[package]]
+name = "indmod"
+version = "0.1.0"
+
