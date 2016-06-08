@@ -1,13 +1,13 @@
-pub struct Index {
-    pub next: Vec<Index>,
+pub struct Index<T>{
+    pub next: Vec<Index<T>>,
     pub node_ind: usize,
-    pub pointer: String,
+    pub pointer: T,
     pub data: Vec<usize>,
     pub num_type : bool
 }
-impl Index {
+impl Index<String>{
     //----------start_Index----------\\
-    pub fn new()-> Index {
+    pub fn new()-> Index<String>{
         Index{
             next:vec![],
             node_ind:0,
@@ -17,7 +17,7 @@ impl Index {
         }
     }
     //----------make_node_of_Index----------\\
-    pub fn make(n:usize,p:String,f:bool)->Index{
+    pub fn make(n:usize,p:String,f:bool)->Index<String>{
         Index{
             next:vec![],
             node_ind:n,
@@ -96,7 +96,7 @@ impl Index {
     pub fn add_new_t(&mut self,n:&usize,p:String,t:usize,f:bool){
         self.next.push(Index::new_t(n.clone(),p,t,f));
     }     
-    fn new_t(n:usize,s:String,title:usize,f:bool)->Index{
+    fn new_t<T>(n:usize,s:T,title:usize,f:bool)->Index<T>{
         Index{
             next:vec![],
             node_ind:n,
@@ -161,7 +161,7 @@ impl Index {
 }
 //--------------------for_Index-------------------//
 //--------------------for_"make_ptree()"
-fn making(s:&mut String,ind:&mut Index,i:&mut usize,ticket:&mut Vec<usize>){
+fn making(s:&mut String,ind:&mut Index<String>,i:&mut usize,ticket:&mut Vec<usize>){
     //println!("ticket: {:?}; string:{}",ticket,s.to_string());
     if s.len()>0{
         if s.chars().nth(0).unwrap()==','{
@@ -201,13 +201,13 @@ fn making(s:&mut String,ind:&mut Index,i:&mut usize,ticket:&mut Vec<usize>){
 }
 //--------------------end_for_Index-------------------//
 
-pub struct Base {
-    pub main_ind: Index,
+pub struct Base<T>{
+    pub main_ind: Index<T>,
     pub n_terms: usize
 }
-impl Base{
+impl Base<String>{
     //----------start_Base----------\\
-    pub fn new()->Base{Base{main_ind: Index::new(),n_terms: 0usize}}  
+    pub fn new()->Base<String>{Base{main_ind: Index::new(),n_terms: 0usize}}  
     //----------add_term_to_Base----------\\
     pub fn add_term(&mut self,s:&String){
         let mut s=s.clone();
@@ -231,7 +231,7 @@ impl Base{
 }
 //--------------------for_Base-------------------//
 //--------------------for_"add_term()"
-fn addition(s:&mut String,ind:&mut Index,n:&usize,i:&mut usize,ticket:&mut Vec<usize>){
+fn addition(s:&mut String,ind:&mut Index<String>,n:&usize,i:&mut usize,ticket:&mut Vec<usize>){
     if s.len()>0{
         if s.chars().nth(0).unwrap()==','{
             s.remove(0);            
@@ -320,7 +320,7 @@ fn addition(s:&mut String,ind:&mut Index,n:&usize,i:&mut usize,ticket:&mut Vec<u
 }
 //--------------------for_Base-------------------//
 //--------------------for_"del_term()"
-fn deletion(ind:&mut Index,t:&usize){
+fn deletion(ind:&mut Index<String>,t:&usize){
     if ind.contain(t)!=0{
         //println!("I have some!{}",ind.pointer.to_string());
         let mut i = 0usize;
@@ -354,7 +354,7 @@ fn deletion(ind:&mut Index,t:&usize){
 }
 //--------------------end_for_Base------------------//
 //--------------------instantiation--------------------//
-pub fn inst(base:&Index,quest:&Index)->Vec<usize>{
+pub fn inst(base:&Index<String>,quest:&Index<String>)->Vec<usize>{
     let mut m:Vec<usize>=vec![];
     if quest.num_type{        
         for b in &base.next{
@@ -380,7 +380,7 @@ pub fn inst(base:&Index,quest:&Index)->Vec<usize>{
     }
     return m;
 }
-fn get_after(b:&Index,q:&Index,n:&usize)->Vec<usize>{
+fn get_after(b:&Index<String>,q:&Index<String>,n:&usize)->Vec<usize>{
     if *n>0{
         let mut v:Vec<usize>=vec![]; 
         for i in &b.next{
@@ -428,7 +428,7 @@ pub fn conjunction(v1:&Vec<usize>,v2:&Vec<usize>)->Vec<usize>{
 }
 //--------------------end_for_instantiation--------------------//
 //--------------------generslization--------------------//
-pub fn gen(base:&Index,query:&Index)->Vec<usize>{
+pub fn gen(base:&Index<String>,query:&Index<String>)->Vec<usize>{
     let mut m:Vec<usize>=vec![];    
     if query.num_type{
         for b in &base.next{
@@ -458,7 +458,7 @@ pub fn gen(base:&Index,query:&Index)->Vec<usize>{
     }
     m
 }
-fn get_a<'a>(ind:&'a Index,n:&usize)->&'a Index{
+fn get_a<'a>(ind:&'a Index<String>,n:&usize)->&'a Index<String>{
     if *n>0{
         if ind.num_type{
             get_a(&ind.next[0],n)

@@ -18,7 +18,7 @@ fn main() {
     ");
     tests_pstring::show_inst();
     tests_pstring::show_gen();
-    /*println!("
+    println!("
     
     //////////////////////////////////////////////
                         DTree
@@ -27,7 +27,7 @@ fn main() {
     
     ");
     tests_dtree::show_inst();
-    tests_dtree::show_gen();*/
+    tests_dtree::show_gen();
     
     
 }
