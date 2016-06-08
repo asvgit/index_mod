@@ -8,40 +8,7 @@ use indmod::tests_pstring;
 use indmod::tests_dtree;
 
 fn main() {
-    /*let mut f = File::open("inp_qbase.txt").unwrap();
-    let mut s = String::new();
-    f.read_to_string(&mut s).unwrap();
-    let mut f = File::open("inp_query.txt").unwrap();
-    let mut st = String::new();
-    f.read_to_string(&mut st).unwrap();
-    s.pop();
-    //let mut s="f(g(a,e(b,c,d,a)),d,a)".to_string();
-    //let mut s="f(g(a),e(a,a),a)".to_string(); //term_with_error
-    //s.push_str("\nf(g(a,c),c)");
-    println!("Base:");
-    println!("{}",s);
-    println!("Question:");
-    st.pop();
-    println!("{}",st);
-    println!("Working:");
-    /*let mut ind = Index::new();
-    ind.make_ptree(&s);
-    println!("{}",ind.to_string());*/
-    
-    let mut b=Base::new();
-    //b.add_term(&s.to_string());
-    for st in s.lines(){
-        b.add_term(&st.to_string());
-    }        
-    //println!("{}",b.to_string());
-    //b.del_term(&1);
-    println!("{}",b.to_string());  
-    let mut q=Index::new();
-    //let mut st="f(*,y)".to_string();
-    q.make_ptree(&st.to_string());
-    println!("{}",q.to_string());
-    println!("{:?}",gen(&b.main_ind.next[0],&q.next[0]));*/
-    /*println!("
+    println!("
     
     //////////////////////////////////////////////
                         PString
@@ -50,7 +17,7 @@ fn main() {
     
     ");
     tests_pstring::show_inst();
-    tests_pstring::show_gen();*/
+    tests_pstring::show_gen();
     println!("
     
     //////////////////////////////////////////////
