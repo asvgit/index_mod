@@ -203,11 +203,12 @@ fn making(s:&mut String,ind:&mut Index<String>,i:&mut usize,ticket:&mut Vec<usiz
 
 pub struct Base<T>{
     pub main_ind: Index<T>,
-    pub n_terms: usize
+    pub n_terms: usize,
+    pub lin: Vec<Vec<usize>>
 }
 impl Base<String>{
     //----------start_Base----------\\
-    pub fn new()->Base<String>{Base{main_ind: Index::new(),n_terms: 0usize}}  
+    pub fn new()->Base<String>{Base{main_ind: Index::new(),n_terms: 0usize,lin: vec![]}}  
     //----------add_term_to_Base----------\\
     pub fn add_term(&mut self,s:&String){
         let mut s=s.clone();
@@ -227,6 +228,25 @@ impl Base<String>{
     pub fn to_string(&self)->String{
         self.main_ind.next[0].to_string_t()        
     }
+    //----------back_racking_for_Base---------\\    
+    pub fn back_quacking(&mut self,l:Vec<String>){
+       let mut set: Vec<usize>=vec![];
+        for s in l{            
+            self.add_term(&s.to_string());
+            set.push(self.n_terms.clone());
+        }    
+        self.lin.push(set);
+    }
+    pub fn back_racking(&mut self){
+        let i = self.lin.len()-1; 
+        let v = self.lin[i].clone();
+        for t in &v{
+            self.del_term(t);     
+        }   
+        let n = self.lin[i].len();
+        self.n_terms-=n;
+        self.lin.pop();
+    }  
     //----------end_impl_Base---------\\
 }
 //--------------------for_Base-------------------//
