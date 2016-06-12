@@ -29,7 +29,7 @@ fn main() {
     tests_dtree::show_inst();
     tests_dtree::show_gen();
     
-    
+    println!("");
 }
 
 

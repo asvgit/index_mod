@@ -79,9 +79,9 @@ impl Index<String>{
         //}
         s.push_str("\n");*/
         s.push_str(self.pointer.as_str());s.push_str(" ");
-        if self.node_ind>0{
+        /*if self.node_ind>0{
             s.push_str(self.node_ind.to_string().as_str());
-        }
+        }*/
         s.push_str("\n");
         if self.next.len()>0{
             for n in &self.next{
@@ -121,42 +121,58 @@ impl Index<String>{
     //----------for_"to_string_t()"
     fn to_string_next_t(&self,t:String)->String{  
         let mut t = t;
-        t.push_str("\t");
-        let mut s=t.clone();
-        /*//if self.num_type{
-            s.push_str(self.node_ind.to_string().as_str());
-            s.push_str(" ");
-        //}else{
-            s.push_str(self.pointer.as_str());
-        //}
-        */
-        s.push_str(self.pointer.as_str());
-        if self.node_ind>0{
-            s.push_str(" [");
-            s.push_str(self.node_ind.to_string().as_str());
-            s.push_str("]");
-        }
-        //s.push_str("\n");
-        //if self.next.len()==0{
-            s.push_str(" {");
-            for i in &self.data {
-                s.push_str(&i.to_string());
+        if self.num_type{
+            let mut s="".to_string();
+                
+            if self.next.len()>0{
+                /*s.push_str(t.as_str());
+                s.push_str("consists!\n");*/
+                for n in &self.next{
+                    //s.push_str(n.to_string_next_t(t.to_string()).as_str());
+                    s.push_str(n.to_string_next_t(t.to_string()).as_str());
+                }
+            }
+            s
+        }else{
+            t.push_str("\t");
+            let mut s=t.clone();
+            /*//if self.num_type{
+                s.push_str(self.node_ind.to_string().as_str());
                 s.push_str(" ");
+            //}else{
+                s.push_str(self.pointer.as_str());
+            //}
+            */
+            s.push_str(self.pointer.as_str());
+            /*if self.node_ind>0{
+                s.push_str(" [");
+                s.push_str(self.node_ind.to_string().as_str());
+                s.push_str("]");
+            }*/
+            //s.push_str("\n");
+            if self.next.len()==0{
+                s.push_str(" {");
+                for i in &self.data {
+                    s.push_str(&i.to_string());
+                    s.push_str(" ");
+                }
+                s.pop();
+                s.push_str("}");
             }
-            s.pop();
-            s.push_str("}");
-        //}
-        s.push_str("\n");
-        if self.next.len()>0{
-            /*s.push_str(t.as_str());
-            s.push_str("consists!\n");*/
-            for n in &self.next{
-                //s.push_str(n.to_string_next_t(t.to_string()).as_str());
-                s.push_str(n.to_string_next_t(t.to_string()).as_str());
+            s.push_str("\n");
+                
+            if self.next.len()>0{
+                /*s.push_str(t.as_str());
+                s.push_str("consists!\n");*/
+                for n in &self.next{
+                    //s.push_str(n.to_string_next_t(t.to_string()).as_str());
+                    s.push_str(n.to_string_next_t(t.to_string()).as_str());
+                }
             }
+            s
         }
-        s
     }
+    
     //----------end_impl_Index---------\\
 }
 //--------------------for_Index-------------------//
