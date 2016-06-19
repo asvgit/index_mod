@@ -88,6 +88,26 @@ pub use pstring::*;
         println!("generslization (gen) : {:?}",p);    
     }
 //--------------------end_for_generslization--------------------//
+    pub fn show_simple(){
+        //take_base
+        let mut f = File::open("inp_book1.txt").unwrap();
+        let mut s = String::new();
+        f.read_to_string(&mut s).unwrap();
+        s.pop();
+        println!("Base:\n");
+        let mut b=Base::new();
+        for st in s.lines(){
+            b.add_term(&st.to_string());
+        } 
+        println!("{}",b.to_string()); 
+        b.add_term(&"f(g(b,c),*)".to_string());
+        println!("\naddition!\n");
+        println!("{}",b.to_string()); 
+        b.del_term(&4);
+        println!("\ndeletion!\n");
+        println!("{}",b.to_string()); 
+        println!("");
+    }
 }
 pub mod tests_dtree {
 //--------------------shower_for_instantiation--------------------//
@@ -176,4 +196,24 @@ pub use dtree::*;
         println!("generslization (gen) : {:?}",p);    
     }
 //--------------------end_for_generslization--------------------//
+    pub fn show_simple(){
+        //take_base
+        let mut f = File::open("inp_book2.txt").unwrap();
+        let mut s = String::new();
+        f.read_to_string(&mut s).unwrap();
+        s.pop();
+        println!("Base:\n{}",s.to_string());
+        let mut b=Base::new();
+        for st in s.lines(){
+            b.add_term(&st.to_string());
+        } 
+        println!("{}",b.to_string()); 
+        b.add_term(&"f(g(b,c),*)".to_string());
+        println!("\naddition!\n");
+        println!("{}",b.to_string()); 
+        b.del_term(&4);
+        println!("\ndeletion!\n");
+        println!("{}",b.to_string()); 
+        println!("");
+    }
 }
